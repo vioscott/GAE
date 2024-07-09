@@ -1,0 +1,67 @@
+
+@media screen and (max-width: 650px){
+    .dark-text h1{
+    font-size: 30px;
+    font-weight: 400;
+    }
+
+  .dark-text b{
+   font-size: 18px;
+  }
+  
+  .dark-text hr{
+   width: 40%;
+   color: #fd961a;
+   margin-left: 30%;
+   margin-top: 10px;
+  }
+  
+  
+   }
+   
+  
+    
+   @media screen and (max-width: 402px){
+    .card {
+    height: 150px;
+    width: 140px;
+  }
+    
+    .card-price{
+   font-size: 11px;
+   font-family:'raleway';
+   position: absolute;
+   margin-left: 7px;
+  }
+  
+  .redtxt{
+   font-size: 10px;
+   text-align: center;
+   color: red;
+  }
+  
+  .greentxt{
+   font-size: 10px;
+   text-align: center;
+   color: green;
+  }
+  
+  .smalltxt{
+   font-size: 9px;
+   text-align: center;
+   color: darkgrey;
+  }
+
+    .dark-text h1{
+    font-size: 23px;
+    font-weight: 400;
+    }
+
+    .dark-text b{
+    font-size: 16px;
+    }
+    
+    .logo-2{
+    margin-left: 10px;
+    }
+}

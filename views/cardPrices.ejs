@@ -1,0 +1,13 @@
+<center>
+    <% crypto.forEach(function(coin) { %>
+        <a href="#" class="card">
+            <img src="<%= coin.image %>" alt="<%= coin.name %>">
+            <div class="card-text"><%= coin.name %></div>
+            <div class="card-price">$<%= coin.current_price.toFixed(2) %></div>
+            <div class="<%= coin.price_change_percentage_24h < 0 ? 'redtxt' : 'greentxt' %>">
+                <%= coin.price_change_percentage_24h.toFixed(2) %>%
+            </div>
+            <div class="smalltxt">1D change</div>
+        </a>
+    <% }); %>
+</center>

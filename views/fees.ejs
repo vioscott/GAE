@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title><%- include("partials/siteName") %></title>
+
+    <%- include("partials/csshead") %>
+</head>
+<%- include("translate.ejs") %>
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <%- include("partials/header") %>
+    <section class="container">
+        <h2>Fees</h2>
+        <div class="col-10 mx-auto">
+            
+            <div class="card h-100 w-100 mx-auto">
+                <div class="card-header">
+                    <h4>Trading Fees</h4>
+                </div>
+                <div class="card-body">
+                    <p>
+                    We do not have commission fees for orders.
+The only one-time fee for activating automated trading is 0.005 BTC - or the equivalent of another currency. These funds are needed to cover the commission for transfers to users' wallets and between exchanges. Otherwise, we would simply work at a loss, since we do not have transaction fees.
+</p>
+                </div>
+            </div>
+                
+            
+        </div>
+        
+        <div class="col-10 mx-auto">
+            
+            <div class="card h-100 w-100 mx-auto">
+                <div class="card-header">
+                    <h4>Transaction Fees</h4>
+                </div>
+                <div class="card-body py-2">
+                    <p> Transferring funds to and from <%- include("partials/siteName") %> wallets entails charges for paying in the network for a specific currency.</p>
+
+                    <p>Replenishment - <%- include("partials/siteName") %> does not charge a deposit fee.</p>
+
+                    <p>Withdrawal - <%- include("partials/siteName") %> does not charge a withdrawal fee.</p>
+                                    </div>
+            </div>
+                
+            
+        </div>
+    </section>
+
+    <!-- ##### Footer Area Start ##### -->
+    <%- include("partials/footer") %>
+        <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script src=js/testimonial.js></script>
+
+</body>

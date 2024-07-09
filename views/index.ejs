@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <meta property="og:title" content="<%- include('partials/siteName') %>  " />
+    <meta property="og:description" content="Welcome to <%- include('partials/siteName') %>" />
+    <meta property="og:image" content="icon.png" />
+
+    <!-- Title -->
+    <title>Investment</title>
+
+    <%- include("partials/csshead") %>
+  </head>
+  <%- include("translate.ejs") %>
+<body>
+    <!-- ##### Preloader ##### -->
+    <div id="preloader">
+      <i class="circle-preloader"></i>
+    </div>
+    <!-- ##### Header Area Start ##### -->
+      <%- include("partials/header") %>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Hero Area Start ##### -->
+    <%- include("hero-area.ejs") %>
+    <!-- ##### Hero Area End ##### -->
+
+    <!-- ##### Course Area Start ##### -->
+    <%- include("courseArea.ejs") %>
+    <!-- ##### Course Area End ##### -->
+
+    <!-- ##### About Area Start ##### -->
+    <!-- TradingView Widget BEGIN -->
+    <%- include("tradingWidget.ejs") %>
+    <!-- TradingView Widget END -->
+    <%- include("aboutArea.ejs") %>
+    <!-- ##### About Area End ##### -->
+<div class="dark-image">
+  <br>
+  <br>
+  <div class="dark-text">
+    <b>300+ currencies available</b>
+    <h1>Stake in the world's most popular Cryptocurrencies</h1>
+    <hr>
+    <br>
+    <%- include("cardPrices.ejs") %>
+  </div>
+    <br>
+</div>
+
+  <%- include("cryptoPlans.ejs") %>
+<!-- section content end -->
+
+<!-- section content begin -->
+
+  <%- include("realEstatePlans.ejs")  %>
+<!-- section content end -->
+<!-- section content begin -->
+<div class="dark-image2">
+  <br>
+  <br>
+  <div class="dark-text2">
+    <h1 style="text-align: center;">Affiliate Program</h1><hr>
+    <p>Affiliate Program opens up additional opportunities for all our investors. By inviting your friends, acquaintances, relatives or colleagues to our Affiliate Program, you earn a guaranteed decent reward for your work! Our Affiliate program offers reward in the amount of 10% from the deposited funds of your referrals. </p>
+  </div>
+</div>
+  <!-- section content end -->
+  <!-- Live Testimonial -->
+
+  <%- include("liveTestimonial.ejs") %>
+  <%- include("testContainer.ejs") %>
+	
+  <%- include("videoTest.ejs") %>
+<!-- end -->
+<style>
+.vid-overlay {
+  position: relative;
+  width: 500px;
+  margin: 4px auto;
+  padding: 20px;
+}
+.vid-overlay video {
+  width: 100%;
+  display: block;
+}
+.vid-overlay:before {
+  content: '';
+  position: absolute;
+  background: black;
+  opacity:0.5;
+  border-radius: 5px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.icon{
+    font-size:25px;
+}
+
+</style>
+
+    <!-- ##### Footer Area Start ##### -->
+    <%- include('partials/footer') %>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- All Plugins js -->
+    <!-- <script src="js/plugins/plugins.js"></script> -->
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <script src=js/testimonial.js></script>
+</body>
+
+</html>

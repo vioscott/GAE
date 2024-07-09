@@ -1,0 +1,150 @@
+<%- include("partials/head") %>
+<style>
+    .small-txt {
+        font-size: 14px;
+    }
+</style>
+
+<div class="row">
+    <div class="col col-lg-5 mx-auto">
+        <div class="card">
+            <div class="card-header h3 text-center text-primary">
+                Portfolio's summary
+            </div>
+            <div class="avatar flex-shrink-0 mx-auto">
+                <img
+                    src="assets/img/icons/unicons/wallet-info.png"
+                    alt="Credit Card"
+                    class="rounded"
+                />
+            </div>
+            <div class="card-body">
+                <p>Total balance <span class="display-6 float-end">$<%= balance %></span></p>
+                <p>All Portfolios <span class="badge bg-primary float-end"><%= num_portfolio %></span></p>
+                <p>Active Portfolios <span class="badge bg-success float-end"><%= num_active_portfolio %></span></p>
+                <p>Settled Portfolios <span class="badge bg-info float-end"><%= num_settled_portfolio %></span></p>
+            </div>
+            <div class="card-footer d-grid gap-2 mx-auto">
+                <a href="/create-portfolio"><button class="btn btn-primary btn-block">
+                    Create portfolio <b>+</b>
+                </button></a>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+<div class="row mt-3">
+    <h3 class="text-center text-primary">My Portfolios</h3>
+    <% if (portfolios.length > 0) { %>
+        <% portfolios.forEach(function(portfolio) { %>
+            <div class="col col-lg-6 p-2">
+                <div class="card container">
+                    <div class="card-header h3 text-center text-primary">
+                        <div class="card-title"><%= portfolio.name %> <span class="text-end text-secondary small-txt"><%= portfolio.ticker %></span></div>
+                    </div>
+                    <div class="card-body row">
+                        <div class="my-3 text-center">
+                            <span>Available</span>
+                            <h3>$<%= portfolio.balance %></h3>
+                        </div>
+                        <div class="col-6">
+                            <div class="my-3">
+                                <p class="mb-1 badge bg-info">Setup Date</p>
+                                <div><%= portfolio.date %></div>
+                            </div>
+                            <div class="my-3">
+                                <span class="badge bg-info">Tenure</span><br/>
+                                <span><%= portfolio.tenure %></span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="my-3">
+                                <span class="badge bg-info">Rate</span><br/>
+                                <span><%= portfolio.rate %>%</span>
+                            </div>
+                            <div class="my-3">
+                                <span class="badge bg-info">Status</span><br/>
+                                <span><%= portfolio.status %></span>
+                            </div>
+                        </div>
+                        <% if (portfolio.bot === 0) { %>
+                            <p class="text-center text-danger">No bot active for this portfolio
+                                <button class="btn btn-sm border" data-bs-toggle="modal" data-bs-target="#bots-modal">Purchase bot</button>
+                            </p>
+                        <% } else { %>
+                            <p class="text-center text-success"><%= portfolio.bot_name %> active +<%= portfolio.bot_rate %>% interest</p>
+                        <% } %>
+                        <div class="mx-auto" align="center">
+                            <% if (portfolio.status !== 'settled') { %>
+                                <a href="/fund" class="btn btn-success waves-effect"><i class="fa fa-arrow-down">&nbsp;</i>Deposit</a>
+                                <% if (portfolio.status === 'active') { %>
+                                    <a href="/withdraw?portfolio=<%= portfolio.id %>" class="btn btn-primary waves-effect"><i class="fa fa-arrow-up">&nbsp;</i>Withdraw</a>
+                                <% } %>
+                            <% } %>
+                            <% if (portfolio.status === 'settled') { %>
+                                <a href="/withdraw?portfolio=<%= portfolio.id %>" class="btn btn-primary waves-effect"><i class="fa fa-arrow-up">&nbsp;</i>Withdraw</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <div class="alert alert-info mx-auto">
+            You have no portfolios set up.
+        </div>
+    <% } %>
+</div>
+
+<div class="modal fade" id="bots-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" action="/bot-invoice">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Select Bot</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="portfolioSelect" class="form-label">Portfolio</label>
+                            <select class="form-control" name="portfolio" id="portfolioSelect">
+                                <% availablePortfolios.forEach(function(portfolio) { %>
+                                    <option value="<%= portfolio.id %>"><%= portfolio.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="botSelect" class="form-label">Bot Name</label>
+                            <select class="form-control" name="bot" id="botSelect">
+                                <% bots.forEach(function(bot) { %>
+                                    <option value="<%= bot.id %>"><%= bot.name %></option>
+                                <% }); %>
+                            </select>
+                            <span class="text-secondary text-center">
+                                <small> Read more about our bots <a href="/bots">Here</a></small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col mb-0">
+                            <label for="currencySelect" class="form-label">Currency</label>
+                            <select name="currency" class="form-control" id="currencySelect">
+                                <% paymentMethods.forEach(function(method) { %>
+                                    <option value="<%= method.id %>"><%= method.name %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("partials/foot") %>

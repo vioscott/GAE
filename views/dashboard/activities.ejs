@@ -1,0 +1,46 @@
+<%- include("partials/head") %>
+<!-- Transactions -->
+<div class="row">
+<div class="col-md-12 col-lg-12 order-2 mb-4 mx-auto">
+                  <div class="card h-100">
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                      <h5 class="card-title m-0 me-2">Activities</h5>
+                      <div class="dropdown">
+                      </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Portfolio</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <% if (activities.length > 0) { %>
+                        <% activities.forEach(function(activity) { %>
+                          <tr>
+                            <td><i class='fab fa-angular fa-lg text-danger me-3'></i> <strong><%= activity.portfolio_name %></strong></td>
+                            <td><%= activity.description %></td>
+                            <td><%= activity.amount %></td>
+                            <td><span class='badge bg-label-primary me-1'><%= activity.status %></span></td>
+                            <td><%= activity.date %></td>
+                          </tr>
+                        <% }); %>
+                      <% } else { %>
+                        <tr>
+                          <td colspan="5">No activities found.</td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </div>
+                    </div>
+                  </div>
+                </div>
+                          </div>
+<%- include("partials/head") %>

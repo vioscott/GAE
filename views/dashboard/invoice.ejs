@@ -1,0 +1,117 @@
+<%- include("partials/head.ejs") %>
+<div class="row">
+  <div class="col-xl-7 col-lg-7 col-md-12">
+    <div class="card" style="background: #f7f8fa">
+      <div class="card-body">
+        <div class="buyer-seller">
+          <div class="d-flex justify-content-between mb-3">
+            <div class="seller-info text-right">
+              <span id="folioName"></span>
+              <h4 class="card-title" style="font-weight: 200">
+                INVOICE PAYMENT DETAILS
+              </h4>
+            </div>
+          </div>
+          <table width="100%">
+            <tbody>
+              <tr>
+                <td align="right"><h6 id="expiry"></h6></td>
+              </tr>
+              <tr>
+                <td><div class="progress"></div></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+                <tr id="invDetails1">
+                  <td>
+                    <span>PAY TO :</span><br />
+                    <a href="#" onclick="copyFn();">
+                      <span id="address" style="font-weight: 200">
+                        <input id="wallet-address" type="text" class="form-control" value="<%= address %>" readonly />
+                      </span>
+                      <br />
+                      <h6>
+                        <button class="btn btn-light border" onclick="copyAddress()" >
+                          <i class="bx bx-copy"></i><span id="copyText"> Copy</span>
+                        </button>
+                      </h6>
+                    </a>
+                  </td>
+                </tr>
+                <tr id="invDetails2">
+                  <td>
+                    <span>QR CODE :</span><br />
+                    <img src="<%= qrCodeUrl %>" alt="" class="img-fluid" />
+                    <br />
+                    <h5 style="color: grey">
+                      <small
+                        >If the QR code doesn't work with your wallet, simply
+                        copy and paste the bitcoin address displayed
+                        above.</small
+                      >
+                    </h5>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>INVOICE AMOUNT :</span><br />
+                    <span style="font-weight: 200">$<%= amount %> on <%= currency %></span>
+                  </td>
+                </tr>
+                <tr id="totalPaid" style="display: none">
+                  <td>
+                    <span>AMOUNT PAID:</span><br />
+                    <span style="font-weight: 200" id="paid">$0.00</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span>AMOUNT DUE :</span><br />
+                    <span style="font-weight: 200" id="due"
+                      >$ <%= amount %> on <%= currency %>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-grid gap-2 mx-auto">
+        <form action="/paid" method="post">
+          <input type="submit" class="btn btn-primary btn-block" value="Done">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function copyAddress() {
+    /* Get the text field */
+    var copyText = document.getElementById("wallet-address");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+
+    /* Alert the copied text */
+    swal("success", "Address copied to clipboard", "success");
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const address = document.getElementById('wallet-address').value;
+    fetch(`/generate-qr?address=${address}`)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('qr-code').src = data;
+      })
+      .catch(err => console.error('Error loading QR code:', err));
+  });
+</script>
+<%- include("partials/foot.ejs") %>

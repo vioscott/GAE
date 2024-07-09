@@ -1,0 +1,510 @@
+.plans {
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
+   font-family: inherit;
+    background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+  }
+  
+  .plan {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    background: white;
+    background-clip: padding-box;
+    border: 2px solid #e5ded6;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+   font-family: inherit;
+   
+  }
+  
+  .planp{
+   color: white;
+   font-size: 18px;
+   font-weight: 400;
+   text-align: center;
+  }
+  
+  .plan-title {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: black;
+    opacity: 0.5;
+  }
+  
+  .plan-price {
+    margin-bottom: 20px;
+    line-height: 1;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FCB42D;
+  }
+  
+  
+  .upwards{
+   color: #FCB42D;
+   font-weight: 700;
+   font-family: 'Lato';
+  }
+  
+  .plan-unit {
+    display: block;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: normal;
+    color: black;
+    font-family: 'Raleway';
+  }
+  
+  .plan-features {
+    width: 120px;
+    margin: 20px auto 15px;
+    padding: 15px 0 0 15px;
+    border-top: 1px solid #FCB42D;
+    text-align: left;
+  }
+  
+  .plan-feature {
+    line-height: 19px;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+  }
+  
+  .plan-feature + .plan-feature {
+    margin-top: 5px;
+  }
+  
+  .plan-feature-unit {
+    margin-left: 2px;
+    font-size: 16px;
+  }
+  
+  .plan-feature-name {
+    font-size: 13px;
+    font-weight: normal;
+    color: black;
+  }
+  
+  .plan-button {
+    position: relative;
+    display: block;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background: #FCB42D;
+    border-bottom: 2px solid #cf7e3b;
+    border-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+  
+  .plan-button:active {
+    top: 2px;
+    margin-bottom: 2px;
+    border-bottom: 0;
+  }
+  
+  
+  .plans2 {
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    background-color: whitesmoke;
+   font-family: inherit;
+    background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+  }
+  
+  .plan2 {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    background-color: #ddd;
+    background-clip: padding-box;
+    border: 2px solid #e5ded6;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+   font-family: inherit;
+  }
+  
+  
+  
+  
+  
+  
+  .plans {
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    background-color: white;
+   font-family: inherit;
+    background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+  }
+  
+  .plan {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    background: white;
+    background-clip: padding-box;
+    border: 2px solid #e5ded6;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+   font-family: inherit;
+   
+  }
+  
+  .planp{
+   color: white;
+   font-size: 18px;
+   font-weight: 400;
+   text-align: center;
+  }
+  
+  .plan-title {
+    margin-bottom: 12px;
+    font-size: 24px;
+    color: black;
+    opacity: 0.5;
+  }
+  
+  .plan-price {
+    margin-bottom: 20px;
+    line-height: 1;
+    font-size: 28px;
+    font-weight: bold;
+    color: #FCB42D;
+  }
+  
+  
+  .upwards{
+   color: #FCB42D;
+   font-weight: 700;
+   font-family: 'Lato';
+  }
+  
+  .plan-unit {
+    display: block;
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: normal;
+    color: black;
+    font-family: 'Raleway';
+  }
+  
+  .plan-features {
+    width: 120px;
+    margin: 20px auto 15px;
+    padding: 15px 0 0 15px;
+    border-top: 1px solid #FCB42D;
+    text-align: left;
+  }
+  
+  .plan-feature {
+    line-height: 19px;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+  }
+  
+  .plan-feature + .plan-feature {
+    margin-top: 5px;
+  }
+  
+  .plan-feature-unit {
+    margin-left: 2px;
+    font-size: 16px;
+  }
+  
+  .plan-feature-name {
+    font-size: 13px;
+    font-weight: normal;
+    color: black;
+  }
+  
+  .plan-button {
+    position: relative;
+    display: block;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    background: #FCB42D;
+    border-bottom: 2px solid #cf7e3b;
+    border-color: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+  
+  .plan-button:active {
+    top: 2px;
+    margin-bottom: 2px;
+    border-bottom: 0;
+  }
+  
+  
+  .plans2 {
+    width: 100%;
+    display: block;
+    height: auto;
+    margin: 0;
+    overflow: hidden;
+    background-color: whitesmoke;
+   font-family: inherit;
+    background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+  }
+  
+  .plan2 {
+    display: inline-block;
+    width: 220px;
+    margin: 10px;
+    padding: 15px 25px;
+    text-align: center;
+    background-color: #ddd;
+    background-clip: padding-box;
+    border: 2px solid #e5ded6;
+    border-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+   font-family: inherit;
+  }
+  
+  /*this the dark background */
+  
+  
+  .dark-image{
+    background-color: black;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),
+                         rgba(0, 0, 0, 0.3)), url('images/darktext.jpg') no-repeat center; 
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-attachment: fixed;
+   font-family: 'Raleway';
+   overflow: hidden;
+  }
+  
+  
+  @supports (-webkit-touch-callout: none) {
+    .dark-image{
+    background-color: black;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),
+                         rgba(0, 0, 0, 0.3)), url('images/darktext.jpg'); 
+   background-size: cover;
+   font-family: 'Raleway';
+   overflow: hidden;
+     background-attachment: scroll;
+  }
+  
+  }
+  
+  
+  .dark-text {
+    text-align: center;
+    font-family:'Lato';
+    width: 100%;
+  }
+  
+  .dark-text h1{
+   font-size: 40px;
+   color: white;
+   font-family:'Lato';
+   margin-bottom: 0;
+  }
+  
+  .dark-text b{
+   font-size: 20px;
+   color: #fd961a;
+   text-align: center;
+   font-family: 'Raleway';
+  }
+  
+  .dark-text hr{
+   width: 40%;
+   color: #fd961a;
+   margin-left: 30%;
+   margin-top: 10px;
+  }
+  /* Cards  */
+  .card {
+    height: 190px;
+    width: 190px;
+    background-color: white;
+    display: inline-block;
+    margin: 5px;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    font-family: 'raleway';
+    transition:0.5s;
+  }
+  
+  .card:hover{
+    transform: scale(0.9);
+   text-decoration: none;
+   color: black;
+   
+  }
+  
+  .card:hover .card-text {
+   text-decoration: none;
+    
+  }
+  
+  .card-price{
+   font-size: 15px;
+   font-family:'raleway';
+   position: absolute;
+   margin-left: 15px;
+  }
+  
+  .cardprice-right{
+   font-size: 15px;
+   font-family:'raleway';
+   position: absolute;
+   margin-left: 200px;
+  }
+  
+  .redtxt{
+   font-size: 16px;
+   text-align: center;
+   color: red;
+  }
+  
+  .greentxt{
+   font-size: 16px;
+   text-align: center;
+   color: green;
+  }
+  
+  .smalltxt{
+   font-size: 14px;
+   text-align: center;
+   color: darkgrey;
+  }
+  
+  .card img{
+    background: linear-gradient(rgba(0, 0, 0, 0.5),
+                         rgba(0, 0, 0, 0.5)), ;
+   height: 65%;
+   width: 100%;
+   margin: 0px;
+     
+  }
+  
+  
+  /* END of media screen setting */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .dark-image2{
+    background-color: black;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),
+                         rgba(0, 0, 0, 0.3)), url('../img/bg-img/affiliate.jpg') no-repeat center; 
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-attachment: fixed;
+   font-family: 'Raleway';
+   overflow: hidden;
+  }
+  
+  
+  
+  @supports (-webkit-touch-callout: none) {
+   .dark-image2{
+    background-color: black;
+    margin: 0;
+    height: auto;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.3),
+                         rgba(0, 0, 0, 0.3)), url('../img/bg-img/affiliate.jpg'); 
+   background-size: cover;
+   font-family: 'Raleway';
+   overflow: hidden;
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center center;
+   background-attachment: fixed;
+     background-attachment: scroll;
+   }
+  }
+  
+  
+  .dark-text2 {
+    text-align: center;
+    font-family:'Lato';
+    width: 100%;
+  }
+  
+  .dark-text2 p{
+    color: white;
+    font-family:'Lato';
+    text-align: left;
+   margin-left: 20%;
+   margin-right: 20%;
+   font-size: 18px;
+  }
+  
+  .dark-text2 h1{
+   font-size: 40px;
+   color: white;
+   font-family:'Lato';
+   margin-bottom: 0;
+   text-align: center;
+  }
+  .dark-text2 hr{
+   width: 40%;
+   color: #fd961a;
+   background-color: #fd961a;
+   margin-left: 30%;
+   margin-top: 10px;
+  }
+  
+  

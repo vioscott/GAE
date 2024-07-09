@@ -1,0 +1,60 @@
+<%- include("partials/head") %>
+
+<div class="col-lg-6 mx-auto">
+  <div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Create a new portfolio</h5>
+      <p align="right"><small>Ticker: <%= ticker %></small></p>
+    </div>
+    <div class="card-body">
+      <form action="/create" method="post">
+        <div class="mb-3">
+          <label class="form-label" for="portfolio-name">Portfolio Name</label>
+          <div class="input-group input-group-merge">
+            <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-buildings"></i></span>
+            <input type="text" class="form-control" id="portfolio-name" name="name" placeholder="John Doe's portfolio" required />
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="plan">Tenure</label>
+          <div class="input-group input-group-merge">
+            <span id="basic-icon-default-company2" class="input-group-text"><i class='bx bx-timer'></i></span>
+            <select class="form-control" name="plan" id="plan" required>
+              <% plans.forEach(plan => { %>
+                <option value="<%= plan.id %>"><%= plan.term %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="amount">Minimum amount for portfolio</label>
+          <div class="input-group input-group-merge">
+            <span class="input-group-text"><i class='bx bx-dollar-circle'></i></span>
+            <input type="number" name="amount" id="amount" class="form-control" placeholder="20,000" required />
+            <span id="basic-icon-default-email2" class="input-group-text">USD</span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="currency">Deposit/Withdrawal currency</label>
+          <div class="input-group input-group-merge">
+            <select class="form-control" name="curr" id="currency" required>
+              <% paymentMethods.forEach(method => { %>
+                <option value="<%= method.id %>"><%= method.name %></option>
+              <% }) %>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="address">Enter your deposit/Withdrawal address</label>
+          <div class="input-group input-group-merge">
+            <span class="input-group-text"><i class='bx bx-dollar-circle'></i></span>
+            <input type="text" name="address" id="address" class="form-control" placeholder="0xcv643FSM4NB37MESDF5LWO" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create portfolio</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/foot") %>

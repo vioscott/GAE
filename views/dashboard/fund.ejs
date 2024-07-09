@@ -1,0 +1,129 @@
+<%- include("partials/head") %>
+<div class="row">
+  <div class="col-lg-6 mx-auto">
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Fund your portfolio</h5>
+        <small class="text-muted float-end"></small>
+      </div>
+      <div class="card-body">
+        <form action="/fund" method="post">
+          <div class="mb-3">
+            <label class="form-label" for="portfolio-select">Select portfolio</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-fullname2" class="input-group-text">
+                <i class="bx bx-buildings"></i>
+              </span>
+              <select class="form-control" name="portfolio" id="portfolio-select" required>
+                <% if (portfolios.length > 0) { %>
+                  <% portfolios.forEach(function(portfolio) { %>
+                    <option value="<%= portfolio.id %>"><%= portfolio.portfolio_name %></option>
+                  <% }); %>
+                <% } else { %>
+                  <option value="" disabled>No portfolios available</option>
+                <% } %>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="plan-select">Select plan</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-fullname2" class="input-group-text">
+                <i class="bx bx-buildings"></i>
+              </span>
+              <select class="form-control" name="plan" id="plan-select" required>
+                <% if (portfolios) { %>
+                  <% portfolios.forEach(function(portfolio) { %>
+                    <option value="<%= portfolio.rate %>"><%= portfolio.rate %></option>
+                  <% }); %>
+                <% } else { %>
+                  <option value="" disabled selected>Select a portfolio first</option>
+                <% } %>
+                <!-- <option value="" disabled selected>Select a portfolio first</option> -->
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="currency-select">Which currency do you prefer to pay with</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-company2" class="input-group-text">
+                <i class="bx bx-timer"></i>
+              </span>
+              <select class="form-control" name="currency" id="currency-select" required>
+                <option value="" disabled>Select a Currency</option>
+                <option value="USDT">USDT</option>
+                <option value="BTC" >BTC</option>
+                <option value="ETH">ETH</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="amount-select">Amount you want to deposit</label>
+            <div class="input-group input-group-merge">
+              <span class="input-group-text"><i class="bx bx-dollar-circle"></i></span>
+              <select class="form-control" name="amount" id="amount-select" required>
+                <% if (portfolios) { %>
+                  <% portfolios.forEach(function(portfolio) { %>
+                    <option value="<%= portfolio.amount %>"><%= portfolio.amount %></option>
+                  <% }); %>
+                <% } else { %>
+                  <option value="" disabled selected>Select a portfolio first</option>
+                <% } %>
+                <!-- <option value="" disabled selected>Select a portfolio first</option> -->
+              </select>
+              <span id="basic-icon-default-email2" class="input-group-text">USD</span>
+            </div>
+            <div class="form-text">Only Numbers & Periods</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Deposit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('portfolio-select').addEventListener('change', function() {
+      var portfolioId = this.value;
+      if (portfolioId) {
+        fetch('/portfolio-details/' + portfolioId)
+          .then(response => response.json())
+          .then(data => {
+            if (data) {
+              // Populate plan select
+              var planSelect = document.getElementById('plan-select');
+              planSelect.innerHTML = '<option value="' + data.rate + '">' + data.rate + '</option>';
+
+              // Populate currency select
+              var currencySelect = document.getElementById('currency-select');
+              currencySelect.innerHTML = '<option value="' + data.curr + '">' + data.curr + '</option>';
+
+              // Populate amount select
+              var amountSelect = document.getElementById('amount-select');
+              amountSelect.innerHTML = '<option value="' + data.amount + '">' + data.amount + '</option>';
+            } else {
+              resetSelects();
+            }
+          })
+          .catch(err => {
+            console.error('Error fetching portfolio details:', err);
+            resetSelects();
+          });
+      } else {
+        resetSelects();
+      }
+    });
+
+    function resetSelects() {
+      document.getElementById('plan-select').innerHTML = '<option value="" disabled selected>Select a portfolio first</option>';
+      document.getElementById('currency-select').innerHTML = '<option value="" disabled selected>Select a portfolio first</option>';
+      document.getElementById('amount-select').innerHTML = '<option value="" disabled selected>Select a portfolio first</option>';
+    }
+  });
+</script> -->
+<%- include("partials/foot") %>
