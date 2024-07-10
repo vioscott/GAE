@@ -44,10 +44,26 @@
             <div class="row h-100 align-items-center justify-content-center">
                 <div class="col-12">
                     <p>
-                        Copyright &copy;<%= new Date().getFullYear() %> All rights reserved | INVESTMENT EMPIRE
+                        Copyright &copy;<%= new Date().getFullYear() %> All rights reserved | <%- include("siteUrl.ejs") %>
                     </p>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var toggler = document.querySelector('.classy-navbar-toggler');
+  var menu = document.querySelector('.classy-menu');
+  var closeIcon = document.querySelector('.classycloseIcon');
+
+  toggler.addEventListener('click', function() {
+    menu.classList.toggle('show');
+  });
+
+  closeIcon.addEventListener('click', function() {
+    menu.classList.remove('show');
+  });
+});
+
+</script>
