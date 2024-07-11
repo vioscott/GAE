@@ -521,11 +521,11 @@ img {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50px; /* Adjust based on your header height */
-    left: 0;
-    width: 100%;
+    top: 10px; /* Adjust based on your header height */
+    left: 50%;
     background: white; /* Adjust based on your design */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    width: 50%;
   }
 
   .classy-menu.show {
@@ -537,7 +537,7 @@ img {
   }
 
   .classy-menu .classynav ul li {
-    margin: 10px 0;
+    margin: 5px 0;
     text-align: center;
   }
 
@@ -549,24 +549,14 @@ img {
     cursor: pointer;
   }
   .classy-navbar {
+    display: flex;
+    flex-direction: column;
     flex-direction: row;
     align-items: center;
   }
 
-  .classy-navbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .classy-navbar-toggler {
     margin-left: auto;
-}
-
-.classy-menu {
-    width: 50%;
-    margin-right: 0;
-    margin-left: 50%;
 }
 
 .nav.classynav {
