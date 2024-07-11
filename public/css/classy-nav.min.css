@@ -502,13 +502,6 @@ img {
   a {
   border-bottom: none;
 }
-.breakpoint-off .classynav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-}
 
 
 
