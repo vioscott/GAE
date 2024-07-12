@@ -502,13 +502,8 @@ img {
   a {
   border-bottom: none;
 }
-.breakpoint-off .classynav {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-  align-items: center;
-}
+
+
 
 @media (max-width: 768px) {
   .classy-navbar-toggler {
@@ -519,11 +514,11 @@ img {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 50px; /* Adjust based on your header height */
-    left: 0;
-    width: 100%;
+    top: 10px; /* Adjust based on your header height */
+    left: 50%;
     background: white; /* Adjust based on your design */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    width: 50%;
   }
 
   .classy-menu.show {
@@ -535,7 +530,7 @@ img {
   }
 
   .classy-menu .classynav ul li {
-    margin: 10px 0;
+    margin: 5px 0;
     text-align: center;
   }
 
@@ -546,6 +541,47 @@ img {
     right: 10px;
     cursor: pointer;
   }
+  .classy-navbar {
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+  }
+
+.classy-navbar-toggler {
+    margin-left: auto;
+}
+
+.nav.classynav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    width: 100%;
+}
+
+.nav.classynav ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.nav.classynav ul li {
+    width: 100%;
+    text-align: right;
+}
+
+.nav.classynav ul li a {
+    display: block;
+    color: #000;
+    padding: 5px 15px;
+    text-decoration: none;
+}
+
+.nav.classynav ul li a:hover {
+    background-color: #575757;
+}
 }
 .breakpoint-off .classynav ul li .dropdown {
   width: 180px;
