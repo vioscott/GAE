@@ -16,26 +16,12 @@
                     <div class="card-body">
                       <form action="/save_changes" id="formAccountSettings" method="POST" onsubmit="return true" enctype="multipart/form-data">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                          src='<%= profile_picture %>'
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar"
-                        />
+                        <img src='<%= profile_picture %>' alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
                             <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="upload"
-                              class="account-file-input"
-                              hidden
-                              accept="image/png, image/jpeg"
-                              name="fileToUpload"
-                            />
+                            <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" name="fileToUpload" />
                           </label>
                           
 
@@ -45,14 +31,7 @@
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">Username</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="fullname"
-                              name="username"
-                              value= '<%= username %>'
-                              autofocus
-                            />
+                            <input class="form-control" type="text" id="fullname" name="username" value= '<%= username %>' autofocus />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Full Name</label>
@@ -60,63 +39,29 @@
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">E-mail</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="email"
-                              value='<%= email%>'
-                              placeholder=""
-                              readonly
-                            />
+                            <input class="form-control" type="text" id="email" name="email" value='<%= email%>' placeholder="" readonly />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="organization" class="form-label">Organization</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="organization"
-                              name="organisation"
-                              value='<%= organization %>'
-                            />
+                            <input type="text" class="form-control" id="organization" name="organisation" value='<%= organization %>' />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label class="form-label" for="phoneNumber">Phone Number</label>
                             <div class="input-group input-group-merge">
-                              
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phone"
-                                class="form-control"
-                                placeholder="202 555 0111"
-                                value='<%= phone_number %>'
-                              />
+                              <input type="text" id="phoneNumber" name="phone" class="form-control" placeholder="202 555 0111" value='<%= phone_number %>' />
                             </div>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" 
-                            id="address" name="address" 
-                            placeholder="Address" value='<%= address %>'/>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Address" value='<%= address %>'/>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="state" class="form-label">City</label>
-                            <input class="form-control" type="text" 
-                            id="city" name="city" placeholder="California" 
-                            value='<%= city %>' />
+                            <input class="form-control" type="text" id="city" name="city" placeholder="California" value='<%= city %>' />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="zipCode" class="form-label">Zip Code</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="zipCode"
-                              name="zip"
-                              placeholder="231465"
-                              maxlength="6"
-                              value='<%= zip_code %>'
-                            />
+                            <input type="text" class="form-control" id="zipCode" name="zip" placeholder="231465" maxlength="6" value='<%= zip_code %>' />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="wallet" class="form-label">Wallet Address</label>
@@ -135,20 +80,9 @@
                           <div class="mb-3 col-md-6">
                               <label for="zipCode" class="form-label">Referral link</label>
                               <div class="input-group">
-                                  <input
-                              type="text"
-                              class="form-control"
-                              id="ref"
-                              name="ref"
-                              placeholder="231465"
-                              maxlength="6"
-                              value='http://<%- include("partials/siteName")%>/register?ref=<%= username %>'
-                              readonly
-                            />
+                                  <input type="text" class="form-control" id="ref" name="ref" placeholder="231465" maxlength="6" value='http://<%- include("partials/siteUrl")%>/register?ref=<%= username %>' readonly />
                             <button type="button" onclick="copyRef()" class="btn btn-primary">Copy link</button>
                               </div>
-                            
-                            
                           </div>
                           
                         </div>
