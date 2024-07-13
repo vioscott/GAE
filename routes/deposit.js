@@ -20,10 +20,21 @@ router.post('/fund', async (req, res) => {
             const portfolioResult = await db.query("SELECT * FROM portfolios WHERE id = $1", [portfolio]);
             await db.query('UPDATE portfolios SET rate = $1 WHERE id = $2', [plan, portfolio]);
             const name = portfolioResult.rows[0].portfolio_name;
+
+            function generateRandomCode(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                  result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            }
+            
+                const trx_id = generateRandomCode(10); // Generate a random code of 10 characters 
             // Insert transaction
             const result = await db.query(
                 'INSERT INTO transactions(user_id, transaction_id, amount, type, status, date, unix_time, currency) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id',
-                [userId, name, amount, 'deposit', status, date, unixTime, currency]
+                [userId, trx_id, amount, 'deposit', status, date, unixTime, currency]
             );
 
             // Insert activity
@@ -36,26 +47,26 @@ router.post('/fund', async (req, res) => {
             const trxId = result.rows[0].id;
 
             // Send user email
-            // const userMailOptions = {
-            //     from: process.env.EMAIL,
-            //     to: email,
-            //     subject: 'New deposit awaiting confirmation',
-            //     text: 'Your deposit request has been received and is awaiting confirmation. You will be contacted once our team has reviewed your account.'
-            // };
+            const userMailOptions = {
+                from: process.env.EMAIL,
+                to: email,
+                subject: 'New deposit awaiting confirmation',
+                text: 'Your deposit request has been received and is awaiting confirmation. You will be contacted once our team has reviewed your account.'
+            };
 
-            // await transporter.sendMail(userMailOptions);
+            await transporter.sendMail(userMailOptions);
 
-            // // Send admin email
-            // const adminMailOptions = {
-            //     from: process.env.EMAIL,
-            //     to: adminEmail,
-            //     subject: 'New deposit awaiting confirmation',
-            //     html: `<p>New deposit</p>
-            //         <p>Amount: ${amount}</p>
-            //         <p>From: ${email}</p>`
-            // };
+            // Send admin email
+            const adminMailOptions = {
+                from: process.env.EMAIL,
+                to: adminEmail,
+                subject: 'New deposit awaiting confirmation',
+                html: `<p>New deposit</p>
+                    <p>Amount: ${amount}</p>
+                    <p>From: ${email}</p>`
+            };
 
-            // await transporter.sendMail(adminMailOptions);
+            await transporter.sendMail(adminMailOptions);
 
             // Redirect to invoice
             res.redirect(`/invoice?currency=${currency}&amount=${amount}`);

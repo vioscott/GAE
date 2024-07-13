@@ -1,66 +1,68 @@
 <%- include('partials/head') %>
+
+<h4 class='text-center'>
+  <% if (portfolio) { %>
+    Withdraw from <%= portfolioName %>
+  <% } else { %>
+    Withdraw
+  <% } %>
+</h4>
+
 <div class="row">
-  <div class="col-lg-6 mx-auto">
-    <div class="card mb-4">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Fund your portfolio</h5>
-      </div>
+  <div class="col col-lg-6 mx-auto">
+    <div class="card">
       <div class="card-body">
-        <form action="/withdraw" method="post">
-          <div class="mb-3">
-            <label class="form-label" for="portfolio-select">Select portfolio</label>
-            <div class="input-group input-group-merge">
-              <span id="basic-icon-default-fullname2" class="input-group-text">
-                <i class="bx bx-buildings"></i>
-              </span>
-              <select class="form-control" name="portfolio" id="portfolio-select" required>
-                <% if (portfolios.length > 0) { %>
+        <form method="post">
+          <% if (!portfolio) { %>
+            <div class='mb-3'>
+              <label class='form-label' for='portfolioSelect'>Portfolio Name</label>
+              <div class='input-group input-group-merge'>
+                <span id='basic-icon-default-fullname2' class='input-group-text'><i class='bx bx-buildings'></i></span>
+                <select name='portfolio' class='form-control' required>
                   <% portfolios.forEach(function(portfolio) { %>
-                    <option value="<%= portfolio.id %>"><%= portfolio.name %></option>
-                  <% }); %>
-                <% } else { %>
-                  <option value="" disabled>No portfolios available</option>
-                <% } %>
+                    <option value='<%= portfolio.id %>'><%= portfolio.portfolio_name %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+          <% } %>
+
+          <div class="mb-3">
+            <label class="form-label" for="paymentSelect">Where are you withdrawing to?</label>
+            <div class="input-group input-group-merge">
+              <span id="basic-icon-default-company2" class="input-group-text"><i class='bx bx-timer'></i></span>
+              <select class="form-control" name="type" id="type">
+                <% paymentMethods.forEach(payment => { %>
+                  <option value='<%= payment.id %>'><%= payment.name %></option>
+                <% }) %> 
               </select>
             </div>
-          </div>
+          </div> 
 
           <div class="mb-3">
-            <label class="form-label" for="type">Where are you withdrawing to?</label>
+            <label class="form-label" for="amountInput">Amount to withdraw</label>
             <div class="input-group input-group-merge">
-              <span id="basic-icon-default-company2" class="input-group-text">
-                <i class="bx bx-timer"></i>
-              </span>
-              <select class="form-control" name="type" id="type" required>
-                <% paymentMethods.forEach(function(method) { %>
-                  <option value="<%= method.id %>"><%= method.name %></option>
-                <% }); %>
-              </select>
+              <span class="input-group-text"><i class='bx bx-dollar-circle'></i></span>
+              <input type="number" name="amount" id="amountInput" class="form-control" placeholder="20,000" required/>
+              <span id="basic-icon-default-email2" class="input-group-text">USD</span>
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" for="amount">Amount to withdraw</label>
+            <label class="form-label" for="emailInput">Email</label>
             <div class="input-group input-group-merge">
-              <span class="input-group-text"><i class="bx bx-dollar-circle"></i></span>
-              <input type="number" name="amount" id="amount" class="form-control" placeholder="20,000" required />
-              <span class="input-group-text">USD</span>
-            </div>
-            <div class="form-text">You can use letters, numbers & periods</div>
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label" for="email">Email</label>
-            <div class="input-group input-group-merge">
-              <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@example.com" required />
-              <span class="input-group-text">@</span>
+              <span class="input-group-text"><i class=''></i></span>
+              <input type="email" name="email" id="emailInput" class="form-control" placeholder="johndoe@example.com" required/>
+              <span id="basic-icon-default-email2" class="input-group-text">@</span>
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" for="address">Wallet address</label>
+            <label class="form-label" for="walletInput">Wallet address</label>
             <div class="input-group input-group-merge">
-              <input type="text" name="address" id="address" class="form-control" placeholder="0xsgdjfovjffvjvuf34505j4em" />
+              <span class="input-group-text"><i class=''></i></span>
+              <input type="text" name="address" id="walletInput" class="form-control" placeholder="0xsgdjfovjffvjvuf34505j4em"/>
+              <span id="basic-icon-default-email2" class="input-group-text"></span>
             </div>
           </div>
 
@@ -70,4 +72,5 @@
     </div>
   </div>
 </div>
+
 <%- include('partials/foot') %>
