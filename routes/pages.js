@@ -214,28 +214,26 @@ router.get('/withdrawals', async (req, res) => {
     if (req.isAuthenticated()) {
         const userResult = await db.query('SELECT * FROM users WHERE email = $1', [req.user.email]);
         const user = userResult.rows[0];
-      try {
+        try {
         const userId = req.user.user_id;
-  
+
         const transactionsResult = await db.query(`
-          SELECT transactions.transaction_id, transactions.amount, transactions.status, transactions.date, portfolios.portfolio_name as portfolio_name
-          FROM transactions
-          INNER JOIN portfolios ON transactions.id = portfolios.id
-          WHERE transactions.user_id = $1 AND transactions.type = 'withdrawal'
-          ORDER BY transactions.id DESC
+            SELECT transactions.transaction_id, transactions.amount, transactions.status, transactions.date, portfolios.portfolio_name as portfolio_name
+            FROM transactions
+            INNER JOIN portfolios ON transactions.id = portfolios.id
+            WHERE transactions.user_id = $1 AND transactions.type = 'withdrawal'
+            ORDER BY transactions.id DESC
         `, [userId]);
-  
         const transactions = transactionsResult.rows;
-  
         res.render('dashboard/withdrawals.ejs', { transactions, ...user });
-      } catch (err) {
+    } catch (err) {
         console.error('Error fetching transactions:', err);
         res.status(500).send('Internal server error');
-      }
-    } else {
-      res.redirect('/login');
     }
-  });
+    } else {
+        res.redirect('/login');
+    }
+});
 
 
 export default router;
