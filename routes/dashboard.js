@@ -88,43 +88,4 @@ router.get('/paid', isAuthenticated, async (req, res) => {
     }
 });
 
-router.get('/admin-dashboard', isAuthenticated, async (req, res) => {
-    try {
-        const userResult = await db.query('SELECT * FROM users WHERE email = $1', [req.user.email]);
-        if (userResult.rows.length > 0) {
-            const user = userResult.rows[0];
-            const portfolioResult = await db.query("SELECT * FROM portfolios WHERE user_id = $1", [user.user_id]);
-            const portfolio = portfolioResult.rows[0] || {};
-            const transactionsResult = await db.query("SELECT * FROM transactions WHERE user_id = $1", [user.user_id]);
-            const transactions = transactionsResult.rows[0] || {};
-            const activitiesResult = await db.query("SELECT * FROM activities WHERE user_id = $1", [user.user_id]);
-            const activities = activitiesResult.rows[0];
-            const loginsResult = await db.query('SELECT login_time, device FROM user_logins WHERE user_id = $1 ORDER BY login_time DESC LIMIT 20', [user.user_id]);
-
-
-            try {
-                const transactionsQuery = `SELECT t.id, t.amount, t.user_id, u.name, u.email 
-                                           FROM transactions t 
-                                           JOIN users u ON t.user_id = u.id 
-                                           WHERE t.status = 'pending' AND t.type = 'deposit' 
-                                           ORDER BY t.id DESC`;
-                const { rows: transactions } = await db.query(transactionsQuery);
-            } catch (err) {
-                console.error('Error fetching transactions:', err);
-                res.status(500).send('Internal Server Error');
-            }
-
-            res.render("admin/admin.ejs", { 
-                 ...transactions, ...user,
-                ...activities, ...portfolio, logins: loginsResult.rows
-            });
-        } else {
-            res.redirect('/login');
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
 export default router;

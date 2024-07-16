@@ -15,6 +15,7 @@ import pagesRoutes from './routes/pages.js';
 import depositsRoutes from './routes/deposit.js';
 import withdrawRoutes from './routes/withdraw.js';
 import assetsRoutes from './routes/assets.js';
+import adminRoutes from './routes/admin.js';
 import fs from "fs";
 import path from "path";
 import db from './config/db.js';
@@ -66,6 +67,7 @@ app.use('/', pagesRoutes);
 app.use('/', depositsRoutes);
 app.use('/', withdrawRoutes);
 app.use('/', assetsRoutes);
+app.use('/', adminRoutes);
 
 
 // Initialize DB and start server

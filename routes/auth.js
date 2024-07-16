@@ -20,8 +20,8 @@ router.post('/register', async (req, res) => {
         } else {
             const hash = await bcrypt.hash(password, saltRounds);
             const userResult = await db.query(
-                'INSERT INTO users (email, password_hash, username) VALUES ($1, $2, $3) RETURNING *',
-                [email, hash, username]
+                'INSERT INTO users (email, password_hash, username, role, status) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+                [email, hash, username, "subscriber", "unverified"]
             );
             const user = userResult.rows[0];
             const userId = user.user_id;
@@ -46,11 +46,32 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-    failureFlash: true
-}));
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) { return next(err); }
+        if (!user) { return res.redirect('/login'); }
+
+        req.logIn(user, async (err) => {
+            if (err) { return next(err); }
+            
+            try {
+                // Fetch the role of the user
+                const result = await db.query("SELECT role FROM users WHERE user_id = $1", [user.user_id]);
+                const role = result.rows[0].role;
+                
+                if (role === 'admin') {
+                    return res.redirect('/admin-dashboard');
+                } else if (role === 'subscriber') {
+                    return res.redirect('/dashboard');
+                } else {
+                    return res.redirect('/login'); // Redirect to login if role is undefined or not recognized
+                }
+            } catch (err) {
+                return next(err);
+            }
+        });
+    })(req, res, next);
+});
 
 router.post('/deactivate', async (req, res) => {
     try {
