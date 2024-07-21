@@ -97,13 +97,11 @@ router.post('/create', async (req, res) => {
             const description = "New portfolio created";
 
             // Insert portfolio query
-            const portfolioQuery = `
+            await db.query(`
                 INSERT INTO portfolios (user_id, portfolio_name, description, amount, rate, save_pro, created_at, unix_time, ticker, curr, address)
                 VALUES ($1, $2, $3, $4, $5, 'no', $6, $7, $8, $9, $10)
                 RETURNING id
-            `;
-            const portfolioValues = [user_id, name, description, amount, plan, date, unix_time, ticker, curr, address];
-            const portfolioResult = await db.query(portfolioQuery, portfolioValues);
+            `, [user_id, name, description, amount, plan, date, unix_time, ticker, curr, address]);
 
             // Create activity entry
             await db.query(`INSERT INTO activities (user_id, description, portfolio_name, amount, date, status)
