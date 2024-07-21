@@ -99,16 +99,18 @@
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
                         <div class="card-body">
-                          <h5 class="card-title text-primary">Congratulations <%= username %>! 🎉</h5>
-                          <p class="mb-4">
                             <% if (trades > 0 ) { %>
-                              You have done <span class='fw-bold'>55%</span> more trades today. Check your new badge in
-                            your profile.
+                              <h5 class="card-title text-primary">Congratulations <%= username %>! 🎉</h5>
+                              <p class="mb-4">
+                                You have done <span class='fw-bold'>55%</span> more trades today. Check your new badge in
+                                your profile.
+                              </p>
                             <% } else {%>
-                              You have done <span class='fw-bold'>0%</span> more trades today. Purchase bots to make more trades.
-                            <% } %> 
-                          </p>
-
+                              <h5 class="card-title text-primary">Oops <%= username %>! 😔</h5>
+                              <p class="mb-4">
+                                You have done <span class='fw-bold'>0%</span> more trades today. Purchase bots to make more trades.
+                              </p>
+                            <% } %>
                           <a href="/portfolios" class="btn btn-sm btn-outline-primary">View Portfolios</a>
                         </div>
                       </div>
@@ -315,13 +317,13 @@
                               </div>
                               <div class="mt-sm-auto">
                                 <small class="text-success text-nowrap fw-semibold"
-                                  ><i class="bx bx-chevron-up"></i> Deposited</small
+                                  ><i class="bx bx-chevron-up"></i> Deposits</small
                                 >
                                 <h3 class="mb-0">$<%= deposited %></h3>
                               </div>
                                <div class="mt-sm-auto">
                                 <small class="text-success text-nowrap fw-semibold"
-                                  ><i class="bx bx-chevron-up"></i> Referral bonus</small
+                                  ><i class="bx bx-chevron-up"></i> Ref bonus</small
                                 >
                                 <h3 class="mb-0">$<%= ref_bonus %></h3>
                               </div>
