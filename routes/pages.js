@@ -1,7 +1,7 @@
 import express from 'express';
 import db from '../config/db.js';
 import axios from 'axios';
-
+import sendMail from '../config/mail.js';
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ router.get("/portfolios", async (req, res) => {
 
             // Fetch portfolios
             const portfoliosResult = await db.query(`
-                SELECT *
+                SELECT portfolios.id, portfolios.portfolio_name, portfolios.ticker, portfolios.balance, portfolios.rate, portfolios.amount, portfolios.status, portfolios.created_at, iv_schemes.roi as roi, iv_schemes.duration as duration
                 FROM portfolios
                 INNER JOIN iv_schemes ON portfolios.rate = iv_schemes.id
                 WHERE portfolios.user_id = $1
@@ -117,17 +117,20 @@ router.get("/fund", async (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         try {
+            const user_id = req.user.user_id;
             const userResult = await db.query("SELECT * FROM users WHERE email = $1", [req.user.email]);
-            if (userResult.rows.length > 0) {
-                const user = userResult.rows[0];
-                const userId = user.user_id;
-                const portfoliosResult = await db.query("SELECT * FROM portfolios WHERE user_id = $1", [userId]);
+            const user = userResult.rows[0];
+    
+            const portfoliosResult = await db.query('SELECT * FROM portfolios WHERE user_id = $1', [user_id]);
+            const plansResult = await db.query('SELECT * FROM iv_schemes WHERE active = $1', ['yes']);
+            const paymentMethodsResult = await db.query('SELECT * FROM addresses');
 
-                res.render("dashboard/fund.ejs", { portfolios: portfoliosResult.rows, ...user });
-
-            } else {
-                res.redirect("/login");
-            }
+                res.render('dashboard/fund.ejs', {
+                    portfolios: portfoliosResult.rows,
+                    plans: plansResult.rows,
+                    paymentMethods: paymentMethodsResult.rows,
+                    ...user
+                });
         } catch (err) {
             console.log(err);
         }
@@ -136,28 +139,55 @@ router.get("/fund", async (req, res) => {
     }
 }); 
 
-
-router.get('/portfolio-details/:id', async (req, res) => {
+router.post('/fund-portfolio', async (req, res) => {
     if (req.isAuthenticated()) {
         try {
-            const portfolioId = req.params.id
-            const result = await db.query("SELECT rate, amount, curr FROM portfolios WHERE portfolio_id = $1", [portfolioId]);
-            if (result.rows.length > 0) {
-                res.json(result.rows[0]);
-                console.log(result);
-            } else {
-                res.status(404).json({ error: 'Portfolio not found' });
+            const { portfolio, plan, currency, amount } = req.body;
+            const user_id = req.user.user_id;
+            const description = `new deposit of $${amount}`;
+            const status = 'pending';
+            const date = new Date().toLocaleString();
+            const unix_time = Math.floor(Date.now() / 1000);
+
+            const userResult = await db.query('SELECT * FROM users WHERE user_id = $1', [user_id]);
+
+            const email = userResult.rows[0].email;
+
+            function generateRandomCode(length) {
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                  result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
             }
+            
+            const trx_id = generateRandomCode(10); // Generate a random code of 10 characters 
+
+            await db.query(`
+            INSERT INTO transactions (user_id, transaction_id, amount, type, status, date, unix_time, currency)
+            VALUES ($1, $2, $3, 'deposit', $4, $5, $6, $7)
+            RETURNING id
+            `, [user_id, trx_id, amount, status, date, unix_time, currency]);
+
+            await db.query(`INSERT INTO activities (user_id, description, portfolio_name, amount, date, status)
+                    VALUES ($1, $2, $3, $4, $5, $6)`, 
+            [user_id, description, portfolio, amount, date, "active"]);
+
+            sendMail(email, 'New deposit awaiting confirmation', 'Your deposit request has been received and is awaiting confirmation. You will be contacted once our team has reviewed your account.');
+
+            sendMail(process.env.ADMIN_EMAIL, 'New deposit awaiting confirmation', `<p>New deposit</p><p>Amount: $${amount}</p><p>From: ${email}</p>`);
+
+            await db.query('UPDATE portfolios SET rate = $1 WHERE id = $2', [plan, portfolio]);
+
+            res.redirect(`/invoice?currency=${currency}&amount=${amount}`);
         } catch (err) {
-            console.error('Error fetching portfolio details:', err);
-            res.status(500).json({ error: 'Internal server error' });
+            console.log(err);
         }
     } else {
         res.redirect("/login");
     }
 });
-
-
 
 router.get("/bots", (req, res) => {res.render("dashboard/bots.ejs");})
 

@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import db from '../config/db.js';
 import path from "path";
+import swal from "sweetalert";
 import { check, validationResult } from 'express-validator';
 
 const router = express.Router();

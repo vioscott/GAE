@@ -35,7 +35,7 @@
             <div class='col-lg-6 p-2'>
                 <div class='card container'>
                     <div class='card-header h3 text-center text-primary'>
-                        <div class='card-title'><%= portfolio.name %> <span class='text-end text-secondary small-txt'><%= portfolio.ticker %></span></div>
+                        <div class='card-title'><%= portfolio.portfolio_name %> <span class='text-end text-secondary small-txt'><%= portfolio.ticker %></span></div>
                     </div>
                     <div class='card-body row'>
                         <div class='my-3 text-center'>
@@ -45,7 +45,7 @@
                         <div class='col-6'>
                             <div class='my-3'>
                                 <p class='mb-1 badge bg-info'>Setup Date</p>
-                                <div><%= portfolio.date %></div>
+                                <div><%= portfolio.created_at %></div>
                             </div>
                             <div class='my-3'>
                                 <span class='badge bg-info'>Tenure</span><br/>
@@ -55,7 +55,7 @@
                         <div class='col-6'>
                             <div class='my-3'>
                                 <span class='badge bg-info'>Rate</span><br/>
-                                <span><%= portfolio.ROI %>%</span>
+                                <span><%= portfolio.roi %>%</span>
                             </div>
                             <div class='my-3'>
                                 <span class='badge bg-info'>Status</span><br/>
@@ -63,12 +63,12 @@
                             </div>
                         </div>
                     </div>
-                    <% if (portfolio.bot == 0) { %>
+                    <% if (portfolio.bot === 0) { %>
                         <p class='text-center text-danger'>No bot active for this portfolio
                             <button class='btn btn-sm border' data-bs-toggle='modal' data-bs-target='#bots-modal'>Purchase bot</button>
                         </p>
                     <% } else { %>
-                        <p class='text-center text-success'><%= portfolio.bot_name %> active +<%= portfolio.bot_rate %>% interest</p>
+                        <p class='text-center text-success'><%= portfolio.bot_name %> active +<%= portfolio.roi %>% interest</p>
                     <% } %>
                     <div class='mx-auto' align='center'>
                         <% if (portfolio.status !== 'settled') { %>

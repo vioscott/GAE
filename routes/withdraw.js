@@ -1,5 +1,6 @@
 import express from 'express';
 import db from '../config/db.js';
+import swal from "sweetalert";
 
 const router = express.Router();
 
@@ -36,17 +37,17 @@ router.get('/withdraw', async (req, res) => {
 
 router.post('/withdraw', async (req, res) => {
     if (req.isAuthenticated()) {
-        const userId = req.session.user_id;
-        const { amount, type, email, address, portifolio } = req.body;
+        const userId = req.user.user_id;
+        const { amount, type, email, address, portfolios } = req.body;
         const date = new Date().toLocaleDateString();
         const unix_time = Math.floor(Date.now() / 1000);
         const status = 'pending';
         const description = `new withdrawal of $${amount}`;
         try{
-            const portfolioResult = await db.query('SELECT * FROM portfolios WHERE id = $1', [portifolio]);
+            const portfolioResult = await db.query('SELECT * FROM portfolios WHERE id = $1', [portfolios]);
             const portfolio = portfolioResult.rows[0];
             const portfolioBalance = portfolio.balance;
-            const portfolioName = portfolio.name;
+            const portfolioName = portfolio.portfolio_name;
             const portfolioAmount = portfolio.amount;
     
             if (amount > portfolioAmount) {
@@ -85,41 +86,21 @@ router.post('/withdraw', async (req, res) => {
                     const trxId = result.rows[0].id;
         
                     // Send user email
-                    const userMailOptions = {
-                        from: process.env.EMAIL,
-                        to: email,
-                        subject: 'New deposit awaiting confirmation',
-                        text: 'Your deposit request has been received and is awaiting confirmation. You will be contacted once our team has reviewed your account.'
-                    };
-        
-                    await transporter.sendMail(userMailOptions);
-        
-                    // Send admin email
-                    const adminMailOptions = {
-                        from: process.env.EMAIL,
-                        to: adminEmail,
-                        subject: 'New deposit awaiting confirmation',
-                        html: `<p>New deposit</p>
-                            <p>Amount: ${amount}</p>
-                            <p>From: ${email}</p>`
-                    };
-        
-                    await transporter.sendMail(adminMailOptions);
-                    // Assuming createActivity is defined elsewhere
-                    // createActivity(userId, `$${amount} withdrawal placed for ${portifolioName}`, portifolioName, amount, date, '', trxID);
-            
+                    sendMail(email, 'New withdrawal awaiting confirmation', 'Your withdrawal request has been received and is awaiting confirmation. You will be contacted once our team has reviewed your account.');           
                     // Send email to admin and user (assume sendmail is defined elsewhere)
-                    // sendmail(admin_email, `Withdrawal request for ${username} #${rand}`, `New Withdrawal request for ${email}. Amount: ${amount}, BTC Address: ${wallet}, Email: ${email}`);
-            
+                    sendmail(process.env.ADMIN_EMAIL, `Withdrawal request for ${username} #${rand}`, `New Withdrawal request for ${email}. Amount: ${amount}, BTC Address: ${wallet}, Email: ${email}`);
+                    res.redirect ("/activities")
                     res.send("<script>swal('Great','We have received your request. you\'ll be contacted soon','success');</script>");
                 } else {
                     res.send("<script>swal('Oops','Not enough funds in this portfolio','warning');</script>");
+                    res.redirect("/withdraw");
                 }
             } else {
-            res.send("<script>swal('Oops','Maximum withdrawal set for this portfolio is " + portfolioData.amount + "','warning');</script>");
+            res.send("<script>swal('Oops','Maximum withdrawal set for this portfolio is " + portfolioAmount + "','warning');</script>");
+            res.redirect("/withdraw");
             }
         } catch (err) {
-        await pool.query('ROLLBACK');
+        await db.query('ROLLBACK');
         console.error('Error processing withdrawal:', err);
         res.status(500).send('Internal Server Error');
         }

@@ -4,7 +4,7 @@ import passport from "passport";
 import session from "express-session";
 import dotenv from "dotenv";
 import flash from "connect-flash";
-
+import swal from "sweetalert";
 
 import { initPassport } from './config/passport.js';
 import authRoutes from './routes/auth.js';

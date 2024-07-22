@@ -2,6 +2,7 @@ import express from 'express';
 import passport from 'passport';
 import bcrypt from 'bcrypt';
 import db from '../config/db.js';
+import sendMail from '../config/mail.js';
 import useragent from "useragent";
 
 const router = express.Router();

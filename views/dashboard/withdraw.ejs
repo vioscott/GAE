@@ -18,7 +18,7 @@
               <label class='form-label' for='portfolioSelect'>Portfolio Name</label>
               <div class='input-group input-group-merge'>
                 <span id='basic-icon-default-fullname2' class='input-group-text'><i class='bx bx-buildings'></i></span>
-                <select name='portfolio' class='form-control' required>
+                <select name='portfolios' class='form-control' required>
                   <% portfolios.forEach(function(portfolio) { %>
                     <option value='<%= portfolio.id %>'><%= portfolio.portfolio_name %></option>
                   <% }) %>

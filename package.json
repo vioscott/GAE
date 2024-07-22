@@ -36,6 +36,7 @@
     "qr-image": "^3.2.0",
     "qrcode": "^1.5.3",
     "sequelize": "^6.37.3",
+    "sweetalert": "^2.1.2",
     "useragent": "^2.3.0"
   }
 }
