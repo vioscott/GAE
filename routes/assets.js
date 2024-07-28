@@ -6,13 +6,13 @@ const router = express.Router();
 
 const fetchCryptoData = async () => {
     const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
-      params: {
+        params: {
         vs_currency: 'usd',
         ids: 'bitcoin,ethereum,dogecoin,litecoin,cardano,tron,binancecoin,ripple,solana,chainlink,bitcoin-cash,polkadot,usd-coin,pancakeswap-token'
-      }
+    }
     });
     return response.data;
-  };
+};
 
 
 router.get("/assets", async (req, res) => {
@@ -63,9 +63,6 @@ router.get("/assets", async (req, res) => {
         res.redirect("/login");
     }
 });
-
-
-
 
 
 export default router;
